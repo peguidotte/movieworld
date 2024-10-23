@@ -20,7 +20,7 @@ export default function MovieListPage() {
     })
     .catch(error => console.error(error))
     .finally(() => console.log('fetch finalizado'));
-    }, 3000);
+    });
   }, [currentPage]);
 
   const filmesFiltrados = filmes.filter(movie => (movie.title.toLowerCase().includes(search.toLowerCase())));
@@ -28,9 +28,9 @@ export default function MovieListPage() {
 
   return (
     <>
-      <main className='grid grid-cols-4 justify-items-center gap-5'>
-        <h2 className='col-span-4 text-2xl font-bold text-center mb-5'>Veja o catálogo completo de filmes</h2>
-        <form className='col-span-4 w-2/4 flex flex-col justify-center gap-2 mb-5'>
+      <main className='flex flex-col items-center justify-center gap-5'>
+        <h2 className='text-2xl font-bold text-center mb-5'>Veja o catálogo completo de filmes</h2>
+        <form className='w-2/4 flex flex-col justify-center gap-2 mb-5'>
           <input
             type='text'
             value={search}
@@ -38,11 +38,13 @@ export default function MovieListPage() {
             placeholder='Pesquise um filme...'
             className=' text-black p-2 mb-5 border border-gray-300 rounded-md' />
         </form>
+        <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
         {
           filmesFiltrados.length > 0 ?
-          filmesFiltrados.map((movie) => (
-            <MovieCard key={movie.id} {...movie} />
-          ))
+          filmesFiltrados.map((movie) => {
+              console.log(movie);
+              return <MovieCard key={movie.id} {...movie} />
+          })
           :
           <div className='col-span-4 mt-5'>
           <l-bouncy
@@ -52,6 +54,7 @@ export default function MovieListPage() {
           ></l-bouncy>
           </div>
         }
+        </section>
         <div className='col-span-4 flex justify-center'>
           <CircularPagination 
             currentPage={currentPage}

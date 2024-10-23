@@ -20,7 +20,7 @@ export default function MovieDetailPage(){
                     <h2>{movie.titulo || movie.title}</h2>
                     <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w154${movie.poster_path}` : `/${movie.imagem_destaque}`} alt={movie.title || movie.titulo} />
                     <p>{movie.overview}</p>
-                    <p>{movie.vote_average}</p>
+                    <p>{movie.tagline}</p>
                 </div>
             : <p>Filme não encontrado</p>
         }

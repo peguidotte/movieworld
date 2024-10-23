@@ -20,7 +20,7 @@ export default function Header(){
                 <nav>
                     <ul className="flex gap-5">
                         <li><NavLink to="/">Home</NavLink></li>
-                        <li><NavLink to="/movies">Filmes</NavLink></li>
+                        <li><NavLink to="/movies">Pesquisar</NavLink></li>
                         <li><NavLink to="/genre">Gêneros</NavLink></li>
                         <li><NavLink to="/contato">Contato</NavLink></li>
                         {isLogged && <li><NavLink to="/settings">Configurações</NavLink></li>}
