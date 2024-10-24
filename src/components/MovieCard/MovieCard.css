@@ -1,0 +1,31 @@
+.movie-card {
+    position: relative;
+}
+
+.movie-info {
+    display: none;
+    width: 100%;
+}
+
+.movie-card:hover .movie-img, .movie-card:focus-within .movie-img {
+    filter: blur(1px);
+    opacity: 0.4;
+}
+
+.movie-card:hover .movie-info, .movie-card:focus-within .movie-info {
+    display: block;
+    position: absolute;
+}
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+
+button:hover, button:focus{
+    transform: scale(1.1);
+    outline: none;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MovieCard from '../components/MovieCard';
+import MovieCard from '../components/MovieCard/MovieCard';
 import 'ldrs/bouncy'
 import { CircularPagination } from '../components/CircularPagination';
 
