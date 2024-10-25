@@ -6,14 +6,14 @@ import TvIcon from "@mui/icons-material/Tv";
 import PublicIcon from "@mui/icons-material/Public";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from '@mui/icons-material/Search';
-import SavedSearchIcon from '@mui/icons-material/SavedSearch';
-import TheaterComedyOutlinedIcon from '@mui/icons-material/TheaterComedyOutlined';
-import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import EmailIcon from '@mui/icons-material/Email';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import SettingsIcon from '@mui/icons-material/Settings';
+import SearchIcon from "@mui/icons-material/Search";
+import SavedSearchIcon from "@mui/icons-material/SavedSearch";
+import TheaterComedyOutlinedIcon from "@mui/icons-material/TheaterComedyOutlined";
+import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import EmailIcon from "@mui/icons-material/Email";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Header() {
   const [isLogged, setIsLogged] = useState(false);
@@ -22,13 +22,39 @@ export default function Header() {
     setIsLogged(!isLogged);
   };
 
-const itensNav = [
-    { name: "Home", to: "/", activeIcon: <HomeIcon />, inactiveIcon: <HomeOutlinedIcon /> },
-    { name: "Pesquisar", to: "/movies", activeIcon: <SearchIcon/>, inactiveIcon: <SavedSearchIcon/> },
-    { name: "Gêneros", to: "/genre", activeIcon: <TheaterComedyIcon/>, inactiveIcon: <TheaterComedyOutlinedIcon/> },
-    { name: "Contato", to: "/contato", activeIcon: <EmailIcon/>, inactiveIcon: <EmailOutlinedIcon/> },
-    { name: "Configurações", to: "/settings", activeIcon: <SettingsIcon/>, inactiveIcon: <SettingsOutlinedIcon/>, requiresAuth: true }
-];
+  const itensNav = [
+    {
+      name: "Home",
+      to: "/",
+      activeIcon: <HomeIcon fontSize="large"/>,
+      inactiveIcon: <HomeOutlinedIcon fontSize="large"/>,
+    },
+    {
+      name: "Pesquisar",
+      to: "/movies",
+      activeIcon: <SavedSearchIcon fontSize="large"/>,
+      inactiveIcon: <SearchIcon fontSize="large"/>,
+    },
+    {
+      name: "Gêneros",
+      to: "/genre",
+      activeIcon: <TheaterComedyIcon fontSize="large"/>,
+      inactiveIcon: <TheaterComedyOutlinedIcon fontSize="large" />,
+    },
+    {
+      name: "Contato",
+      to: "/contato",
+      activeIcon: <EmailIcon fontSize="large"/>,
+      inactiveIcon: <EmailOutlinedIcon fontSize="large" />,
+    },
+    {
+      name: "Configurações",
+      to: "/settings",
+      activeIcon: <SettingsIcon fontSize="large" />,
+      inactiveIcon: <SettingsOutlinedIcon fontSize="large"/>,
+      requiresAuth: true,
+    },
+  ];
 
   return (
     <>
@@ -44,30 +70,29 @@ const itensNav = [
             className="absolute -right-9 -top-[0.5px] opacity-50 z-0"
           />
         </div>
-        <nav className="flex gap-10 items-center">
-          <ul className="flex gap-8">
-            <NavLink to="/" className={"text-xl font-medium relative"} exact>
-              {({ isActive }) => (
-                <>
-                  <p className="absolute -left-4 opacity-50 z-0">{isActive ? <HomeIcon /> : <HomeOutlinedIcon />}</p>
-                  <p>Home</p>
-                </>
-              )}
-            </NavLink>
-            <li>
-              <NavLink to="/movies">Pesquisar</NavLink>
-            </li>
-            <li>
-              <NavLink to="/genre">Gêneros</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contato">Contato</NavLink>
-            </li>
-            {isLogged && (
-              <li>
-                <NavLink to="/settings">Configurações</NavLink>
-              </li>
-            )}
+        <nav className="flex gap-12 items-center">
+          <ul className="flex gap-10">
+            {itensNav.map((item, index) => {
+              if (item.requiresAuth && !isLogged) return null;
+              return (
+                <li key={index}>
+                  <NavLink
+                    to={item.to}
+                    className={"text-xl font-medium relative"}
+                    exact
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <p className="absolute -left-5 -top-1 opacity-50 z-0">
+                          {isActive ? item.activeIcon : item.inactiveIcon}
+                        </p>
+                        <p>{item.name}</p>
+                      </>
+                    )}
+                  </NavLink>
+                </li>
+              );
+            })}
           </ul>
           <BotaoLogin isLogged={isLogged} handleLogin={handleLogin} />
         </nav>
