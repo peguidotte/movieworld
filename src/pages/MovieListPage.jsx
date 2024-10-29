@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard/MovieCard';
 import 'ldrs/bouncy'
 import { CircularPagination } from '../components/CircularPagination';
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function MovieListPage() {
 
@@ -29,14 +30,14 @@ export default function MovieListPage() {
   return (
     <>
       <main className='flex flex-col items-center justify-center gap-5'>
-        <h2 className='text-2xl font-bold text-center mb-5'>Veja o catálogo completo de filmes</h2>
         <form className='w-2/4 flex flex-col justify-center gap-2 mb-5'>
           <input
             type='text'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Pesquise um filme...'
-            className=' text-black p-2 mb-5 border border-gray-300 rounded-md' />
+            className=' text-purple-900 p-2 px-4 mb-5 rounded-xl focus:outline-none relative'/>
+            <SearchIcon className='text-purple-800 absolute left-[73%] top-[16.5%]'/>
         </form>
         <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
         {

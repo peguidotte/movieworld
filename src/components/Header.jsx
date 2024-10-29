@@ -75,15 +75,15 @@ export default function Header() {
             {itensNav.map((item, index) => {
               if (item.requiresAuth && !isLogged) return null;
               return (
-                <li key={index}>
+                <li key={index} >
                   <NavLink
                     to={item.to}
-                    className={"text-xl font-medium relative"}
+                    className={"text-xl font-medium flex items-center gap-2"}
                     exact
                   >
                     {({ isActive }) => (
                       <>
-                        <p className="absolute -left-5 -top-1 opacity-50 z-0">
+                        <p className="opacity-50 z-0">
                           {isActive ? item.activeIcon : item.inactiveIcon}
                         </p>
                         <p>{item.name}</p>
