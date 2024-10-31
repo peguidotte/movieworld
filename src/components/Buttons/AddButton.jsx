@@ -21,7 +21,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
     },
   });
 
-const AddButton = ({ id, initialAdd }) => {
+const AddButton = ({ id, initialAdd, onFocus, onBlur, tabIndex }) => {
   const [isAdd, setIsAdd] = useState(initialAdd);
 
   useEffect(() => {
@@ -44,6 +44,9 @@ const AddButton = ({ id, initialAdd }) => {
         onClick={toggleAdd}
         aria-pressed={isAdd}
         aria-label={isAdd ? "Remover da Lista de interesse" : "Adicionar a Lista de interesse"}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        tabIndex={tabIndex}
       >
         {isAdd ? (
           <AddCircleIcon className="icon text-purple-800" />

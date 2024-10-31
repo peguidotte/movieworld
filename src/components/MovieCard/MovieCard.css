@@ -3,7 +3,8 @@
 }
 
 .movie-info {
-    display: none;
+    display: block;
+    position: absolute;
     width: 100%;
 }
 
@@ -12,9 +13,8 @@
     opacity: 0.4;
 }
 
-.movie-card:hover .movie-info, .movie-card:focus-within .movie-info {
+.movie-card:focus-within .movie-info {
     display: block;
-    position: absolute;
 }
 
 button{

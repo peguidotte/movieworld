@@ -21,7 +21,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
   },
 });
 
-const FavoriteButton = ({ id, initialFavorite }) => {
+const FavoriteButton = ({ id, initialFavorite, onFocus, onBlur, tabIndex }) => {
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
 
   useEffect(() => {
@@ -44,6 +44,9 @@ const FavoriteButton = ({ id, initialFavorite }) => {
         onClick={toggleFavorite}
         aria-pressed={isFavorite}
         aria-label={isFavorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        tabIndex={tabIndex}
       >
         {isFavorite ? (
           <FavoriteIcon className="icon text-purple-800" />

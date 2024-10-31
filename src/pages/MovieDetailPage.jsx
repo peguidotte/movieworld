@@ -11,7 +11,8 @@ export default function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
-  const isFavorite = JSON.parse(localStorage.getItem(`favorite-${id}`)) || false;
+  const isFavorite =
+    JSON.parse(localStorage.getItem(`favorite-${id}`)) || false;
   const isAdd = JSON.parse(localStorage.getItem(`add-${id}`)) || false;
   const navigate = useNavigate();
 
@@ -78,48 +79,73 @@ export default function MovieDetailPage() {
           zIndex: -1,
         }}
       />
-      <div>
-        <button onClick={() => navigate(-1)} className="text-sm m-10">
-          <ReplyIcon fontSize="large" />
-          Voltar
-        </button>
-        <section className="mx-20">
+      <button onClick={() => navigate(-1)} className="text-sm m-10">
+        <ReplyIcon fontSize="large" />
+        Voltar
+      </button>
+      <div className="mx-24">
+        <section>
           {movie ? (
-            <div
-              key={movie.id}
-              className="flex gap-3"
-            >
+            <div key={movie.id} className="flex gap-3 items-center">
               <div>
                 <img
                   src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
                   alt={""}
                 />
               </div>
-              <div className="flex flex-col gap-2">
-                <h2 className="font-bold text-3xl">{movie.title}</h2>
-                <div className="flex gap-1 items-center mb-4">
-                  <p className="text-lg">{movie.vote_average}</p>
+              <div className="flex flex-col gap-2 w-2/4">
+                <div>
+                  <h2 className="font-bold text-3xl">{movie.title}</h2>
+                  <p className="text-gray-500 text-sm">
+                    {movie.runtime} minutos
+                  </p>
+                </div>
+                <div className="flex gap-1 items-center mb-2">
                   {getStars(movie.vote_average)}
                 </div>
-                <p className="max-w-4xl text-balance">{movie.overview}</p>
-                <p className="font-bold text-xl">{movie.tagline}</p>
+                <p className=" text-balance text-sm">{movie.overview}</p>
+                <p className="font-semibold text-xl ">{movie.tagline}</p>
                 <div className="flex gap-2">
                   <FavoriteButton id={id} initialFavorite={isFavorite} />
                   <AddButton id={id} initialAdd={isAdd} />
+                  <button className="px-2 ml-5 text-white bg-purple-800 rounded-xl">
+                    avaliar
+                  </button>
                 </div>
               </div>
+              {video.results && video.results.length > 0 ? (
+                <iframe
+                  title={video.results[0].name}
+                  width="445"
+                  height="250"
+                  src={`https://www.youtube.com/embed/${video.results[0].key}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
+              ) : null}
             </div>
           ) : null}
-          {video.results && video.results.length > 0 ? (
-            <iframe
-              className="mt-10"
-              title={video.results[0].name}
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${video.results[0].key}`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            ></iframe>
-          ) : null}
+        </section>
+        <section className="mt-20">
+          <p>
+            Data de lançamento:
+            <p className="text-gray-500 text-sm">{movie.release_date}</p>
+          </p>
+          {movie.genres && movie.genres.length > 0 && (
+            <p>
+              Gêneros:{" "}
+              <p className="text-gray-500 text-sm">
+                {movie.genres.map((genre) => genre.name).join(", ")}
+              </p>
+            </p>
+          )}
+          {movie.production_countries && movie.production_countries.length > 0 && (
+            <p>
+              País de produção:{" "}
+              <p className="text-gray-500 text-sm">
+                {movie.production_countries.map((country) => country.name).join(", ")}
+              </p>
+            </p>
+          )}
         </section>
       </div>
     </div>
