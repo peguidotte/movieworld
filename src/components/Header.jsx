@@ -26,39 +26,39 @@ export default function Header() {
     {
       name: "Home",
       to: "/",
-      activeIcon: <HomeIcon fontSize="large"/>,
-      inactiveIcon: <HomeOutlinedIcon fontSize="large"/>,
+      activeIcon: <HomeIcon fontSize="large" />,
+      inactiveIcon: <HomeOutlinedIcon fontSize="large" />,
     },
     {
       name: "Pesquisar",
       to: "/movies",
-      activeIcon: <SavedSearchIcon fontSize="large"/>,
-      inactiveIcon: <SearchIcon fontSize="large"/>,
+      activeIcon: <SavedSearchIcon fontSize="large" />,
+      inactiveIcon: <SearchIcon fontSize="large" />,
     },
     {
       name: "Gêneros",
       to: "/genre",
-      activeIcon: <TheaterComedyIcon fontSize="large"/>,
+      activeIcon: <TheaterComedyIcon fontSize="large" />,
       inactiveIcon: <TheaterComedyOutlinedIcon fontSize="large" />,
     },
     {
       name: "Contato",
       to: "/contato",
-      activeIcon: <EmailIcon fontSize="large"/>,
+      activeIcon: <EmailIcon fontSize="large" />,
       inactiveIcon: <EmailOutlinedIcon fontSize="large" />,
     },
     {
       name: "Configurações",
       to: "/settings",
       activeIcon: <SettingsIcon fontSize="large" />,
-      inactiveIcon: <SettingsOutlinedIcon fontSize="large"/>,
+      inactiveIcon: <SettingsOutlinedIcon fontSize="large" />,
       requiresAuth: true,
     },
   ];
 
   return (
     <>
-      <header className="w-full h-10 flex justify-between items-center p-10  bg-purple-900">
+      <header className="w-full h-10 flex justify-between items-center p-10 bg-purple-900 fixed top-0 left-0 z-50">
         <div className="flex items-center gap-2 relative">
           <TvIcon
             sx={{ fontSize: 60 }}
@@ -75,7 +75,7 @@ export default function Header() {
             {itensNav.map((item, index) => {
               if (item.requiresAuth && !isLogged) return null;
               return (
-                <li key={index} >
+                <li key={index}>
                   <NavLink
                     to={item.to}
                     className={"text-xl font-medium flex items-center gap-2"}

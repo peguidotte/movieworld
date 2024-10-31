@@ -29,14 +29,14 @@ export default function MovieListPage() {
   return (
     <>
       <main className='flex flex-col items-center justify-center gap-5 mt-10'>
-        <form className='w-2/4 flex flex-col justify-center gap-2 mb-5'>
+        <form className='w-2/4 flex flex-col justify-center gap-2 mb-5 relative'>
           <input
             type='text'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Pesquise um filme...'
-            className=' text-purple-900 p-2 px-4 mb-5 rounded-xl focus:outline-none relative'/>
-            <SearchIcon className='text-purple-800 absolute left-[73%] top-[16.5%]'/>
+            className=' text-purple-900 p-2 px-4 mb-5 rounded-xl focus:outline-none'/>
+            <SearchIcon className='text-purple-800 absolute right-2 top-[16.5%]'/>
         </form>
         <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
         {
