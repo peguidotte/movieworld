@@ -1,5 +1,4 @@
 import GenreCard from '../components/GenreCard';
-import data from '../data/genres.json';
 
 export default function GenreList(){
     return(

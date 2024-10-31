@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import movies from "../data/movies.json";
+
 import MovieCard from "../components/MovieCard/MovieCard";
 
 

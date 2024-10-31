@@ -26,10 +26,9 @@ export default function MovieListPage() {
 
   const filmesFiltrados = filmes.filter(movie => (movie.title.toLowerCase().includes(search.toLowerCase())));
 
-
   return (
     <>
-      <main className='flex flex-col items-center justify-center gap-5'>
+      <main className='flex flex-col items-center justify-center gap-5 mt-10'>
         <form className='w-2/4 flex flex-col justify-center gap-2 mb-5'>
           <input
             type='text'

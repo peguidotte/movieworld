@@ -21,9 +21,8 @@ button{
     background: none;
     border: none;
     cursor: pointer;
-    transition: transform 0.5s ease;
+    transition: transform 0.2s ease;
 }
-
 
 button:hover, button:focus{
     transform: scale(1.1);

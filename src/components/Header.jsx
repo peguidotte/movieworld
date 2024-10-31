@@ -1,6 +1,6 @@
 import "../index.css";
 import { NavLink } from "react-router-dom";
-import BotaoLogin from "./BotaoLogin";
+import BotaoLogin from "./Buttons/BotaoLogin";
 import { useState } from "react";
 import TvIcon from "@mui/icons-material/Tv";
 import PublicIcon from "@mui/icons-material/Public";
@@ -58,7 +58,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full h-10 flex justify-between items-center p-10 mb-10 bg-purple-900">
+      <header className="w-full h-10 flex justify-between items-center p-10  bg-purple-900">
         <div className="flex items-center gap-2 relative">
           <TvIcon
             sx={{ fontSize: 60 }}

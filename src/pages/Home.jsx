@@ -1,6 +1,6 @@
 import ContainerMovies from "../components/ContainerMovies";
 import MovieCard from "../components/MovieCard/MovieCard";
-import movies from "../data/movies.json";
+
 
 export default function Home(){
     
