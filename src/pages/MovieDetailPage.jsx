@@ -1,18 +1,23 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReplyIcon from "@mui/icons-material/Reply";
 import MovieInfo from "../components/DetailPage/MovieInfo";
 import MovieDetails from "../components/DetailPage/MovieDetails";
 import CastCarousel from "../components/DetailPage/CastCarousel";
+import Recommendations from "../components/DetailPage/CastCarousel";
 
 export default function MovieDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
   const [cast, setCast] = useState({});
+  const [collection, setCollection] = useState({});
+  const [recommendations, setRecommendations] = useState([]);
+
   const isFavorite = JSON.parse(localStorage.getItem(`favorite-${id}`)) || false;
   const isAdd = JSON.parse(localStorage.getItem(`add-${id}`)) || false;
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(
@@ -47,6 +52,33 @@ export default function MovieDetailPage() {
       .catch((err) => console.error(err));
   }, [id]);
 
+  useEffect(() => {
+    if (movie.belongs_to_collection) {
+      const collectionId = movie.belongs_to_collection.id;
+      fetch(
+        `https://api.themoviedb.org/3/collection/${collectionId}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setCollection(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [movie]);
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setRecommendations(data.results);
+      })
+      .catch((err) => console.error(err));
+  }, [id]);
+
+  const director = cast.crew ? cast.crew.find(member => member.job === 'Director')?.name : '';
+
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
       <div
@@ -64,7 +96,7 @@ export default function MovieDetailPage() {
           zIndex: -1,
         }}
       />
-      <button onClick={() => navigate(-1)} className="text-sm m-10">
+      <button onClick={() => navigate("/movies")} className="text-sm m-10">
         <ReplyIcon fontSize="large" />
         Voltar
       </button>
@@ -92,10 +124,27 @@ export default function MovieDetailPage() {
           ) : null}
         </section>
 
-        <div className="flex mt-20 items-center">
-          <MovieDetails movie={movie} />
+        <div className="flex mt-20 items-center justify-around">
+          <MovieDetails movie={movie} director={director} />
           <CastCarousel cast={cast} />
         </div>
+        <div className="flex mt-20 items-center">
+        {movie.belongs_to_collection ? (
+          <div>
+            <h2 className="text-2xl font-semibold">{collection.name}</h2>
+            <div className="flex gap-7 my-5">
+              {collection.parts && collection.parts.map((part) => (
+                <Link to={`/movies/${part.id}`} key={part.id}>
+                  <img className="hover:scale-105 rounded-sm cursor-pointer"
+                  src={`https://image.tmdb.org/t/p/w154${part.poster_path}`} alt={part.title} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        <p>Recomendados:</p>
+        <Recommendations recommendations={recommendations}/>
+      </div>
       </div>
     </div>
   );
