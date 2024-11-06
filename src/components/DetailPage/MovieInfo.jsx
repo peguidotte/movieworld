@@ -34,7 +34,7 @@ const MovieInfo = ({ movie, id, isFavorite, isAdd }) => (
   <div className="flex flex-col gap-2 w-2/4">
     <div>
       <h2 className="font-bold text-3xl">{movie.title}</h2>
-      <p className="text-gray-500 text-sm">{movie.runtime} minutos</p>
+      <p className="text-gray-400 text-base">{movie.runtime} minutos</p>
     </div>
     <div className="flex gap-1 items-center mb-2">{getStars(movie.vote_average)}</div>
     <p className="text-balance text-sm">{movie.overview}</p>

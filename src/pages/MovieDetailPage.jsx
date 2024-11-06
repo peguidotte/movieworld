@@ -4,7 +4,7 @@ import ReplyIcon from "@mui/icons-material/Reply";
 import MovieInfo from "../components/DetailPage/MovieInfo";
 import MovieDetails from "../components/DetailPage/MovieDetails";
 import CastCarousel from "../components/DetailPage/CastCarousel";
-import Recommendations from "../components/DetailPage/CastCarousel";
+import Recommendations from "../components/DetailPage/Recommendations";
 
 export default function MovieDetailPage() {
   const { id } = useParams();
@@ -128,23 +128,22 @@ export default function MovieDetailPage() {
           <MovieDetails movie={movie} director={director} />
           <CastCarousel cast={cast} />
         </div>
-        <div className="flex mt-20 items-center">
-        {movie.belongs_to_collection ? (
-          <div>
-            <h2 className="text-2xl font-semibold">{collection.name}</h2>
-            <div className="flex gap-7 my-5">
-              {collection.parts && collection.parts.map((part) => (
-                <Link to={`/movies/${part.id}`} key={part.id}>
-                  <img className="hover:scale-105 rounded-sm cursor-pointer"
-                  src={`https://image.tmdb.org/t/p/w154${part.poster_path}`} alt={part.title} />
-                </Link>
-              ))}
+        <div className="flex mt-20 gap-10 justify-around">
+          {movie.belongs_to_collection ? (
+            <div>
+              <h2 className="text-2xl font-semibold">{collection.name}</h2>
+              <div className="flex gap-7 my-5">
+                {collection.parts && collection.parts.map((part) => (
+                  <Link to={`/movies/${part.id}`} key={part.id}>
+                    <img className="hover:scale-105 rounded-sm cursor-pointer"
+                      src={`https://image.tmdb.org/t/p/w154${part.poster_path}`} alt={part.title} />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ) : null}
-        <p>Recomendados:</p>
-        <Recommendations recommendations={recommendations}/>
-      </div>
+          ) : null}
+          <Recommendations recommendations={recommendations} />
+        </div>
       </div>
     </div>
   );

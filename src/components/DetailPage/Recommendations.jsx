@@ -6,21 +6,19 @@ const Recommendations = ({ recommendations }) => {
     return null;
   }
 
-  // Pegar os 3 primeiros recomendados
   const topRecommendations = recommendations.slice(0, 3);
 
   return (
-    <div className="recommendations">
+    <div className="mb-4">
       <h2 className="text-2xl font-bold mb-4">Recomendações</h2>
-      <div className="flex gap-4">
+      <div className="flex gap-7">
         {topRecommendations.map((movie) => (
           <Link to={`/movie/${movie.id}`} key={movie.id} className="recommendation-item">
             <img
               src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
               alt={movie.title}
-              className="rounded-lg"
+              className="rounded-lg hover:scale-105"
             />
-            <p className="text-center text-sm mt-2">{movie.title}</p>
           </Link>
         ))}
       </div>
