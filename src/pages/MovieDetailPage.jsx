@@ -16,8 +16,15 @@ export default function MovieDetailPage() {
   const [collection, setCollection] = useState({});
   const [recommendations, setRecommendations] = useState([]);
 
-  const isFavorite = JSON.parse(localStorage.getItem(`favorite-${id}`)) || false;
-  const isAdd = JSON.parse(localStorage.getItem(`add-${id}`)) || false;
+  const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+  const watchListMovies = JSON.parse(localStorage.getItem('watchListMovies')) || [];
+
+  const isFavorite = favoriteMovies.includes(id);
+  const isAdd = watchListMovies.includes(id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   useEffect(() => {
     fetch(

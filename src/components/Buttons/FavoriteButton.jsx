@@ -21,11 +21,22 @@ const CustomTooltip = styled(({ className, ...props }) => (
   },
 });
 
-const FavoriteButton = ({ id, initialFavorite, onFocus, onBlur, tabIndex }) => {
+const FavoriteButton = ({ id, initialFavorite}) => {
   const [isFavorite, setIsFavorite] = useState(initialFavorite);
 
   useEffect(() => {
-    localStorage.setItem(`favorite-${id}`, JSON.stringify(isFavorite));
+    const favorite = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+    if (isFavorite) {
+      if (!favorite.includes(id)) {
+        favorite.push(id);
+      }
+    } else {
+      const index = favorite.indexOf(id);
+      if (index > -1) {
+        favorite.splice(index, 1);
+      }
+    }
+    localStorage.setItem('favoriteMovies', JSON.stringify(favorite));
   }, [isFavorite, id]);
 
   const toggleFavorite = () => {
@@ -44,9 +55,6 @@ const FavoriteButton = ({ id, initialFavorite, onFocus, onBlur, tabIndex }) => {
         onClick={toggleFavorite}
         aria-pressed={isFavorite}
         aria-label={isFavorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        tabIndex={tabIndex}
       >
         {isFavorite ? (
           <FavoriteIcon className="icon text-purple-800" />

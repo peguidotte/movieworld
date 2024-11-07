@@ -8,8 +8,9 @@ import MovieListPage from './pages/MovieListPage.jsx'
 import MovieDetailPage from './pages/MovieDetailPage.jsx'
 import Home from './pages/Home.jsx'
 import GenreList from './pages/GenreList.jsx'
+import Profile from './pages/Profile.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
-import Contato from './pages/Contato.jsx'
+
 
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -23,7 +24,7 @@ const router= createBrowserRouter([
       {path: '/movies/:id', element: <MovieDetailPage />},
       {path: '/genre', element: <GenreList />},
       {path: '/genre/:genero', element: <MoviesByGenrePage />},
-      {path: '/contato', element: <Contato/>},
+      {path: '/profile', element: <Profile />},
       {path: '*', element: <PageNotFound/>}
     ]
     

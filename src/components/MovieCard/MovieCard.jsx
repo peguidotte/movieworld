@@ -5,19 +5,13 @@ import FavoriteButton from "../Buttons/FavoriteButton";
 import AddButton from "../Buttons/AddButton";
 
 export default function MovieCard({ id, title, poster_path }) {
-  const isFavorite =
-    JSON.parse(localStorage.getItem(`favorite-${id}`)) || false;
-  const isAdd = JSON.parse(localStorage.getItem(`add-${id}`)) || false;
+  const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+  const watchListMovies = JSON.parse(localStorage.getItem('watchListMovies')) || [];
+
+  const isFavorite = favoriteMovies.includes(id);
+  const isAdd = watchListMovies.includes(id);
+
   const [isHovered, setIsHovered] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -27,7 +21,7 @@ export default function MovieCard({ id, title, poster_path }) {
     setIsHovered(false);
   };
 
-  const isActive = isHovered || isFocused;
+  const isActive = isHovered 
 
   return (
     <div
@@ -38,7 +32,7 @@ export default function MovieCard({ id, title, poster_path }) {
       aria-labelledby={`movie-title-${id}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onFocus={handleFocus}
+      
     >
       <Link
         to={{
@@ -63,17 +57,12 @@ export default function MovieCard({ id, title, poster_path }) {
           <FavoriteButton
             id={id}
             initialFavorite={isFavorite}
-            onFocus={handleFocus}
-            tabIndex="0"
           />
         
         
           <AddButton
             id={id}
             initialAdd={isAdd}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            tabIndex="0"
           />
         
       </div>

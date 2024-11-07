@@ -1,30 +1,53 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard/MovieCard';
-import 'ldrs/bouncy'
+import 'ldrs/bouncy';
 import { CircularPagination } from '../components/CircularPagination';
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function MovieListPage() {
-
   const [search, setSearch] = useState('');
   const [filmes, setFilmes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br&page=${currentPage}`)
-    .then(response => response.json())
-    .then(data => {
-      setFilmes(data.results);
-      setTotalPages(data.total_pages);
-    })
-    .catch(error => console.error(error))
-    .finally(() => console.log('fetch finalizado'));
-    });
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR&page=${currentPage}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setFilmes(data.results);
+        setTotalPages(data.total_pages);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => console.log('fetch finalizado'));
   }, [currentPage]);
 
-  const filmesFiltrados = filmes.filter(movie => (movie.title.toLowerCase().includes(search.toLowerCase())));
+  useEffect(() => {
+    if (search) {
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR&query=${search}&page=${currentPage}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setFilmes(data.results);
+          setTotalPages(data.total_pages);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => console.log('fetch finalizado'));
+    } else {
+      fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR&page=${currentPage}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setFilmes(data.results);
+          setTotalPages(data.total_pages);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => console.log('fetch finalizado'));
+    }
+  }, [search, currentPage]);
 
   return (
     <>
@@ -40,22 +63,26 @@ export default function MovieListPage() {
         </form>
         <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
         {
-          filmesFiltrados.length > 0 ?
-          filmesFiltrados.map((movie) => {
-              console.log(movie);
+          filmes.length > 0 ? (
+            filmes.map((movie) => {
               return <MovieCard key={movie.id} {...movie} />
-          })
-          :
-          <div className='col-span-4 mt-5'>
-          <l-bouncy
-            size="45"
-            speed="1.75"
-            color="white" 
-          ></l-bouncy>
-          </div>
+            })
+          ) : (
+            <div className='col-span-4 mt-5'>
+              {search ? (
+                <p className="text-white text-lg">Título não encontrado</p>
+              ) : (
+                <l-bouncy
+                  size="45"
+                  speed="1.75"
+                  color="white" 
+                ></l-bouncy>
+              )}
+            </div>
+          )
         }
         </section>
-        <div className='col-span-4 flex justify-center'>
+        <div className='col-span-4 flex justify-center my-5'>
           <CircularPagination 
             currentPage={currentPage}
             totalPages={totalPages}
@@ -63,5 +90,5 @@ export default function MovieListPage() {
         </div>
       </main>
     </>
-  )
+  );
 }

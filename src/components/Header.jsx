@@ -10,10 +10,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import TheaterComedyOutlinedIcon from "@mui/icons-material/TheaterComedyOutlined";
 import TheaterComedyIcon from "@mui/icons-material/TheaterComedy";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Header() {
   const [isLogged, setIsLogged] = useState(false);
@@ -42,17 +40,10 @@ export default function Header() {
       inactiveIcon: <TheaterComedyOutlinedIcon fontSize="large" />,
     },
     {
-      name: "Contato",
-      to: "/contato",
-      activeIcon: <EmailIcon fontSize="large" />,
-      inactiveIcon: <EmailOutlinedIcon fontSize="large" />,
-    },
-    {
-      name: "Configurações",
-      to: "/settings",
-      activeIcon: <SettingsIcon fontSize="large" />,
-      inactiveIcon: <SettingsOutlinedIcon fontSize="large" />,
-      requiresAuth: true,
+      name: "Perfil",
+      to: "/profile",
+      activeIcon: <AccountCircleIcon fontSize="large" />,
+      inactiveIcon: <AccountCircleOutlinedIcon fontSize="large" />,
     },
   ];
 

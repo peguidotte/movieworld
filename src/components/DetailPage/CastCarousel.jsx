@@ -1,8 +1,6 @@
-import { Navigation, Pagination, Scrollbar, A11y, Keyboard } from 'swiper/modules';
+import { Scrollbar, A11y, Keyboard } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './CastCarousel.css'; 
 
@@ -18,10 +16,9 @@ const CastCarousel = ({ cast }) => {
         className='cast-swiper'
         spaceBetween={10}
         slidesPerView={5} 
-        modules={[Navigation, Scrollbar, A11y, Keyboard]}
+        modules={[Scrollbar, A11y, Keyboard]}
         scrollbar={{ draggable: true }}
         keyboard={{ enabled: true }}
-        onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log('slide change')}
         breakpoints={{
           640: {
