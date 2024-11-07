@@ -10,6 +10,7 @@ import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 export default function Profile() {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const [watchList, setWatchList] = useState([]);
+    
 
     useEffect(() => {
         const favoriteIds = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
@@ -38,12 +39,12 @@ export default function Profile() {
             {favoriteMovies.length > 0 ? (
                 <Swiper
                     spaceBetween={0}
-                    slidesPerView={5}
+                    slidesPerView={6}
                     modules={[Scrollbar]}
                     scrollbar={{ draggable: true }}
                 >
                     {favoriteMovies.map((movie) => (
-                        <SwiperSlide key={movie.id} className='p-10 cursor-grab active:cursor-grabbing'>
+                        <SwiperSlide key={movie.id} className='py-10 px-4 cursor-grab active:cursor-grabbing'>
                             <MovieCard
                                 id={movie.id}
                                 title={movie.title}
@@ -59,12 +60,12 @@ export default function Profile() {
             {watchList.length > 0 ? (
                 <Swiper
                     spaceBetween={0}
-                    slidesPerView={5}
+                    slidesPerView={6}
                     modules={[Scrollbar]}
                     scrollbar={{ draggable: true }}
                 >
                     {watchList.map((movie) => (
-                        <SwiperSlide key={movie.id} className='p-10 cursor-grab active:cursor-grabbing'>
+                        <SwiperSlide key={movie.id} className='py-10 px-4 cursor-grab active:cursor-grabbing'>
                             <MovieCard
                                 id={movie.id}
                                 title={movie.title}

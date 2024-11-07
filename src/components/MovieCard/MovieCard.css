@@ -6,6 +6,7 @@
     display: block;
     position: absolute;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .movie-card:hover .movie-img, .movie-card:focus-within .movie-img {
