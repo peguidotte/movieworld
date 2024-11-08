@@ -29,10 +29,17 @@ export default function Home() {
 
     useEffect(() => {
         const fetchMovies = async (url, setMovies, setLoading) => {
-            const response = await fetch(url);
-            const data = await response.json();
-            setMovies(data.results);
-            setLoading(false);
+            setLoading(true);
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                setMovies(data.results || []);
+            } catch (error) {
+                console.error('Erro ao buscar filmes:', error);
+                setMovies([]);
+            } finally {
+                setLoading(false);
+            }
         };
 
         const favoriteIds = JSON.parse(localStorage.getItem('favoriteMovies')) || [];

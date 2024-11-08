@@ -17,7 +17,6 @@ export default function MovieDetailPage() {
   const [collection, setCollection] = useState({});
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [fetchCount, setFetchCount] = useState(0);
 
   const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
   const watchListMovies = JSON.parse(localStorage.getItem('watchListMovies')) || [];
@@ -31,58 +30,53 @@ export default function MovieDetailPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchMovie = fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setMovie(data);
-          setFetchCount((prev) => prev + 1);
-        })
-        .catch((err) => console.error(err));
+      try {
+        const fetchMovie = fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setMovie(data);
+          });
 
-      const fetchVideo = fetch(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setVideo(data);
-          setFetchCount((prev) => prev + 1);
-        })
-        .catch((err) => console.error(err));
+        const fetchVideo = fetch(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setVideo(data);
+          });
 
-      const fetchCast = fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setCast(data);
-          setFetchCount((prev) => prev + 1);
-        })
-        .catch((err) => console.error(err));
+        const fetchCast = fetch(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setCast(data);
+          });
 
-      const fetchCollection = fetch(
-        `https://api.themoviedb.org/3/collection/${movie.belongs_to_collection?.id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setCollection(data);
-          setFetchCount((prev) => prev + 1);
-        })
-        .catch((err) => console.error(err));
+        const fetchCollection = fetch(
+          `https://api.themoviedb.org/3/collection/${movie.belongs_to_collection?.id}?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setCollection(data);
+          });
 
-      const fetchRecommendations = fetch(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setRecommendations(data.results);
-          setFetchCount((prev) => prev + 1);
-        })
-        .catch((err) => console.error(err));
+        const fetchRecommendations = fetch(
+          `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setRecommendations(data.results || []);
+          });
 
-      await Promise.all([fetchMovie, fetchVideo, fetchCast, fetchCollection, fetchRecommendations]);
-      setLoading(false);
+        await Promise.all([fetchMovie, fetchVideo, fetchCast, fetchCollection, fetchRecommendations]);
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();

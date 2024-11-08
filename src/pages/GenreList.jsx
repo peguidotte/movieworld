@@ -13,7 +13,7 @@ export default function GenreList() {
         `https://api.themoviedb.org/3/genre/movie/list?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR`
       );
       const data = await response.json();
-      setGenres(data.genres);
+      setGenres(data.genres || []);
       setLoading(false);
     };
 
