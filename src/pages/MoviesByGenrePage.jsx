@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import MovieCard from '../components/MovieCard/MovieCard.jsx';
 import 'ldrs/bouncy';
 
-export default function MoviesByGenrePage(genreId, genreName) {
+export default function MoviesByGenrePage({genreId, genreName}) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 

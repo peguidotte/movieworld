@@ -13,7 +13,7 @@ const Recommendations = ({ recommendations }) => {
       <h2 className="text-2xl font-bold mb-4">Recomendações</h2>
       <div className="flex gap-7">
         {topRecommendations.map((movie) => (
-          <Link to={`/movie/${movie.id}`} key={movie.id} className="recommendation-item">
+          <Link to={`/movies/${movie.id}`} key={movie.id} className="recommendation-item">
             <img
               src={`https://image.tmdb.org/t/p/w154${movie.poster_path}`}
               alt={movie.title}
