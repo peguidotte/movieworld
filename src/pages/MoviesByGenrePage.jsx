@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import MovieCard from '../components/MovieCard/MovieCard.jsx';
 import 'ldrs/bouncy';
 
-export default function MoviesByGenrePage() {
-  const { genreId } = useParams();
+export default function MoviesByGenrePage(genreId, genreName) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +35,7 @@ export default function MoviesByGenrePage() {
         </div>
       ) : (
         <>
-          <h2 className='text-2xl text-bold ml-8 mt-10'>Filmes do Gênero</h2>
+          <h2 className='text-2xl text-bold ml-8 mt-10'>Melhores filmes de {genreName}</h2>
           <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
             {movies.length > 0 ? (
               movies.map((movie) => (
