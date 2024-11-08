@@ -1,0 +1,25 @@
+.cast-swiper {
+    padding: 10px 10px;
+    cursor: grab;
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.cast-item {
+    max-width: 200px;
+    text-align: center;
+}
+
+.cast-img {
+    width: 154px;
+    /* Defina a largura fixa */
+    height: 154px;
+    /* Defina a altura fixa para manter a proporção */
+    object-fit: cover;
+    /* Garante que a imagem se ajuste ao contêiner */
+}
+
+.swiper-scrollbar-drag {
+    background: rgb(102, 12, 143);
+}
