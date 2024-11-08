@@ -1,6 +1,5 @@
 import "../index.css";
 import { NavLink } from "react-router-dom";
-import BotaoLogin from "./Buttons/BotaoLogin";
 import { useState } from "react";
 import TvIcon from "@mui/icons-material/Tv";
 import PublicIcon from "@mui/icons-material/Public";
@@ -85,7 +84,6 @@ export default function Header() {
               );
             })}
           </ul>
-          <BotaoLogin isLogged={isLogged} handleLogin={handleLogin} />
         </nav>
       </header>
     </>
