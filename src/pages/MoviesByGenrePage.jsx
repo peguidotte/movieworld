@@ -35,7 +35,7 @@ export default function MoviesByGenrePage({genreId, genreName}) {
         </div>
       ) : (
         <>
-          <h2 className='text-2xl text-bold ml-8 mt-10'>Melhores filmes de {genreName}</h2>
+          <h2 className='text-2xl text-bold ml-20 mt-10 my-5'>Melhores filmes de {genreName}</h2>
           <section className='flex flex-wrap gap-10 justify-center align-center mx-10'>
             {movies.length > 0 ? (
               movies.map((movie) => (
